@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     siteName: "UPI Payment App",
     images: [
       {
-        url: "/upi.jpg",
+        url: "/upi-preview.png",
         width: 1200,
         height: 630,
         alt: "UPI Payment QR Code",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "UPI Payment App",
     description: "Pay easily using UPI or other methods. Secure, fast, and hassle-free payments.",
-    images: ["/upi.jpg"],
+    images: ["/upi-preview.png"],
   },
 };
 
