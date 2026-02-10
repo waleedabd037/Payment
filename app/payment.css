@@ -139,3 +139,53 @@
   width: 100%;
   border-radius: 12px;
 }
+.copyBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.copyBtn img {
+  width: 22px;
+  height: 22px;
+}
+
+.upiText {
+  font-size: 13px;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* Center input + submit */
+.utrWrapper {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.utrInput {
+  width: 320px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.submitBtn {
+  width: 320px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitBtn:disabled {
+  background: #c7c7c7;
+  cursor: not-allowed;
+}
