@@ -1,26 +1,85 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.card {
+  width: 360px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.timer {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #000;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.priceRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+}
+
+.copyIconBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.copiedText {
+  font-size: 12px;
+  color: green;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.qrTitle {
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.qr {
+  width: 100%;
+}
+
+.payRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.payBtn {
+  padding: 4px 10px;
+  border: 1px solid #000;
+  background: #fff;
+  cursor: pointer;
 }

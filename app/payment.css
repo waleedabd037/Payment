@@ -1,0 +1,141 @@
+.page {
+  background: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 380px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.timer {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.price {
+  font-size: 34px;
+  font-weight: 700;
+  color: #000;
+}
+
+.copyBtn {
+  border: none;
+  background: #e6f7ec;
+  padding: 4px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.copied {
+  font-size: 11px;
+  color: green;
+}
+
+.oldPrice {
+  text-align: center;
+  text-decoration: line-through;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 18px;
+  color: #000;
+}
+
+.section {
+  margin-top: 16px;
+}
+
+.sectionTitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.payRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.payLeft {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.payLogo {
+  width: 38px;
+  height: 38px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.payTitle {
+  font-weight: 600;
+  color: #000;
+}
+
+.paySub {
+  font-size: 12px;
+  color: #666;
+}
+
+.payBtn {
+  background: #0a6cff;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.qrTitle {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #000;
+}
+.payLogo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.payLogo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.copyIcon {
+  width: 18px;
+  height: 18px;
+}
+
+
+.qr {
+  width: 100%;
+  border-radius: 12px;
+}
