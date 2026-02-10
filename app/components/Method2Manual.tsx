@@ -43,7 +43,7 @@ export default function Method2Manual({ upiId, utr, setUtr, onSubmit }: any) {
         />
 
         {/* ✅ SUBMIT BUTTON */}
-        <button className="submitBtn" onClick={onSubmit} disabled={!utr}>
+        <button className="submitBtn" onClick={onSubmit} >
           SUBMIT
         </button>
       </div>
