@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import "./payment.css";
 
 import Timer from "./components/Timer";
@@ -10,16 +11,25 @@ import Method2Manual from "./components/Method2Manual";
 import Method3QR from "./components/Method3QR";
 
 export default function PaymentPage() {
+
+  const searchParams = useSearchParams();
+
   const [qr, setQr] = useState("");
   const [timeLeft, setTimeLeft] = useState(15 * 60);
   const [utr, setUtr] = useState("");
   const [checking, setChecking] = useState(false);
 
-  const amount = 5427;
-  const oldAmount = 6427;
-  const orderId = "ORD12345";
-  const upiId = "8097246401@dhani";
+  /* -------- GET DATA FROM URL -------- */
+  const amount = Number(searchParams.get("amount")) || 0;
+  const upiId = searchParams.get("upi") || "";
+  const name = searchParams.get("name") || "Merchant";
 
+  /* -------- OPTIONAL OLD PRICE AUTO CALC -------- */
+  const oldAmount = amount ? amount + 1000 : 0;
+
+  const orderId = "ORD" + Date.now();
+
+  /* -------- TIMER -------- */
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((p) => (p <= 0 ? 0 : p - 1));
@@ -27,12 +37,21 @@ export default function PaymentPage() {
     return () => clearInterval(timer);
   }, []);
 
+  /* -------- GENERATE QR -------- */
   useEffect(() => {
+
+    if (!amount || !upiId) return;
+
     const fetchQR = async () => {
       const res = await fetch("/api/generate-qr", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, orderId }),
+        body: JSON.stringify({
+          amount,
+          orderId,
+          upiId,
+          name
+        }),
       });
 
       const data = await res.json();
@@ -40,17 +59,15 @@ export default function PaymentPage() {
     };
 
     fetchQR();
-  }, []);
 
-  /* ---------- SUBMIT HANDLER ---------- */
+  }, [amount, upiId]);
+
+  /* -------- SUBMIT HANDLER -------- */
   const handleManualSubmit = () => {
     setChecking(true);
-
-    // Later: call backend to verify UTR
-    // fetch("/api/verify-utr", ...)
   };
 
-  /* ---------- FULL SCREEN CHECKING ---------- */
+  /* -------- FULL SCREEN CHECKING -------- */
   if (checking) {
     return (
       <div
@@ -79,9 +96,11 @@ export default function PaymentPage() {
           oldAmount={oldAmount}
         />
 
-        <Method1 amount={amount} upiId={upiId} />
+        <Method1
+          amount={amount}
+          upiId={upiId}
+        />
 
-        {/* ✅ METHOD 2 = Manual */}
         <Method2Manual
           upiId={upiId}
           utr={utr}
@@ -89,7 +108,6 @@ export default function PaymentPage() {
           onSubmit={handleManualSubmit}
         />
 
-        {/* ✅ METHOD 3 = QR */}
         <Method3QR qr={qr} />
 
       </div>
