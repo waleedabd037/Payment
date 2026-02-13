@@ -19,25 +19,24 @@ export default function PaymentPage() {
   const [utr, setUtr] = useState("");
   const [checking, setChecking] = useState(false);
 
-  /* -------- GET DATA FROM URL -------- */
+  /* ✅ GET VALUES DIRECTLY FROM URL */
   const amount = Number(searchParams.get("amount")) || 0;
-  const upiId = searchParams.get("upi") || "";
+  const oldAmount = Number(searchParams.get("oldamount")) || 0;
+  const upiId = searchParams.get("upiid") || "";
   const name = searchParams.get("name") || "Merchant";
-
-  /* -------- OPTIONAL OLD PRICE AUTO CALC -------- */
-  const oldAmount = amount ? amount + 1000 : 0;
 
   const orderId = "ORD" + Date.now();
 
-  /* -------- TIMER -------- */
+  /* ---------- TIMER ---------- */
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((p) => (p <= 0 ? 0 : p - 1));
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
-  /* -------- GENERATE QR -------- */
+  /* ---------- GENERATE QR ---------- */
   useEffect(() => {
 
     if (!amount || !upiId) return;
@@ -62,12 +61,12 @@ export default function PaymentPage() {
 
   }, [amount, upiId]);
 
-  /* -------- SUBMIT HANDLER -------- */
+  /* ---------- SUBMIT HANDLER ---------- */
   const handleManualSubmit = () => {
     setChecking(true);
   };
 
-  /* -------- FULL SCREEN CHECKING -------- */
+  /* ---------- FULL SCREEN CHECK ---------- */
   if (checking) {
     return (
       <div
