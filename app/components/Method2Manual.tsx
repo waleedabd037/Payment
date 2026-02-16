@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 
-export default function Method2Manual({ upiId, utr, setUtr, onSubmit }: any) {
+export default function Method2Manual({
+  upiId,
+  utr,
+  setUtr,
+  onSubmit,
+}: any) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -18,6 +23,7 @@ export default function Method2Manual({ upiId, utr, setUtr, onSubmit }: any) {
       <div className="payRow">
         <div className="payLeft">
           <img src="/upi.jpg" className="payLogo" alt="UPI Logo" />
+
           <div>
             <div className="payTitle">Manual transfer</div>
             <div className="paySub">Copy UPI and fill in UTR</div>
@@ -29,8 +35,10 @@ export default function Method2Manual({ upiId, utr, setUtr, onSubmit }: any) {
           <img src="/copy.png" alt="Copy" />
         </button>
 
-        {/* ✅ Show copied message */}
-        {copied && <span className="copied">UPI ID copied to clipboard</span>}
+        {/* ✅ Copied message */}
+        {copied && (
+          <span className="copied">UPI ID copied to clipboard</span>
+        )}
       </div>
 
       {/* 🔽 CENTERED INPUT */}
@@ -43,7 +51,7 @@ export default function Method2Manual({ upiId, utr, setUtr, onSubmit }: any) {
         />
 
         {/* ✅ SUBMIT BUTTON */}
-        <button className="submitBtn" onClick={onSubmit} >
+        <button className="submitBtn" onClick={onSubmit}>
           SUBMIT
         </button>
       </div>

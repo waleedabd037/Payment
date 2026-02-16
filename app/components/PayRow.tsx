@@ -2,37 +2,43 @@
 
 export default function PayRow({ title, logo, appUrl, webUrl }: any) {
 
-const handleClick = () => {
-  const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isMobileDevice = () => {
+    const nav: any = navigator;
 
-  if (!isMobile) {
-    window.open(webUrl, "_blank");
-    return;
-  }
-
-  let pageHidden = false;
-
-  const visibilityHandler = () => {
-    if (document.hidden) {
-      pageHidden = true; // app opened
+    if (nav.userAgentData?.mobile !== undefined) {
+      return nav.userAgentData.mobile;
     }
+
+    return /android|iphone|ipad|ipod/i.test(navigator.userAgent);
   };
 
-  document.addEventListener("visibilitychange", visibilityHandler);
+  const handleClick = () => {
 
-  // try opening app
-  window.location.href = appUrl;
-
-  // fallback check
-  setTimeout(() => {
-    document.removeEventListener("visibilitychange", visibilityHandler);
-
-    if (!pageHidden) {
-      window.open(webUrl, "_blank");
+    // DESKTOP
+    if (!isMobileDevice()) {
+      window.open(webUrl, "_blank", "noopener,noreferrer");
+      return;
     }
-  }, 1800);
-};
 
+    // MOBILE
+    let pageHidden = false;
+
+    const visibilityHandler = () => {
+      if (document.hidden) pageHidden = true;
+    };
+
+    document.addEventListener("visibilitychange", visibilityHandler);
+
+    window.location.href = appUrl;
+
+    setTimeout(() => {
+      document.removeEventListener("visibilitychange", visibilityHandler);
+
+      if (!pageHidden) {
+        window.open(webUrl, "_blank", "noopener,noreferrer");
+      }
+    }, 1800);
+  };
 
   return (
     <div
