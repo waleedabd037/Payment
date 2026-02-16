@@ -62,10 +62,16 @@
 .qrTitle {
   margin-bottom: 10px;
   color: #000;
+  
 }
 
 .qr {
-  width: 100%;
+  width: 250px;      /* smaller size */
+  height: 250px;
+  object-fit: contain;
+  margin-top: 10px;
+
+
 }
 
 .payRow {

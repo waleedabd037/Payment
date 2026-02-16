@@ -1,6 +1,12 @@
 import PayRow from "./PayRow";
 
 export default function Method1({ amount, upiId }: any) {
+
+  const merchantName = "Merchant";
+  const orderId = "ORD" + Date.now();
+
+  const upiLink = `upi://pay?pa=${upiId}&pn=${merchantName}&am=${amount}&cu=INR&tn=${orderId}`;
+
   return (
     <div className="section">
       <div className="sectionTitle">Method 1</div>
@@ -8,22 +14,22 @@ export default function Method1({ amount, upiId }: any) {
       <PayRow
         title="Paytm"
         logo="/paytm.png"
-        appUrl="paytmmp://pay"
-        webUrl="https://paytm.com"
+        appUrl={upiLink}
+        webUrl={upiLink}
       />
 
       <PayRow
         title="PhonePe"
         logo="/phonepe.jpg"
-        appUrl="phonepe://pay"
-        webUrl="https://www.phonepe.com"
+        appUrl={upiLink}
+        webUrl={upiLink}
       />
 
       <PayRow
         title="UPI"
         logo="/upi.jpg"
-        appUrl={`upi://pay?pa=${upiId}&pn=Merchant&am=${amount}&cu=INR`}
-        webUrl="https://www.npci.org.in/what-we-do/upi/product-overview"
+        appUrl={upiLink}
+        webUrl={upiLink}
       />
     </div>
   );

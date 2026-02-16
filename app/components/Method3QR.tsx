@@ -5,8 +5,10 @@ export default function Method3QR({ qr }: any) {
       <div className="qrTitle">Use Mobile Scan code to pay</div>
 
       {qr ? (
-        <img src={qr} className="qr" />
-      ) : (
+       <div className="qrWrapper">
+  <img src={qr} className="qr" />
+</div>
+) : (
         <p>Loading QR...</p>
       )}
     </div>

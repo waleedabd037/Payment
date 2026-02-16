@@ -1,23 +1,23 @@
+"use client";
+
 export default function PayRow({ title, logo, appUrl, webUrl }: any) {
 
-  const handlePay = () => {
-    window.open(webUrl, "_blank");
+  const handleClick = () => {
+    // Try opening app first
     window.location.href = appUrl;
+
+    // Fallback to web after 1 second
+    setTimeout(() => {
+      window.location.href = webUrl;
+    }, 1000);
   };
 
   return (
-    <div className="payRow">
+    <div className="payRow" onClick={handleClick} style={{ cursor: "pointer" }}>
       <div className="payLeft">
-        <img src={logo} className="payLogo" />
-        <div>
-          <div className="payTitle">{title}</div>
-          <div className="paySub">Convenient and fastest</div>
-        </div>
+        <img src={logo} className="payLogo" alt={title} />
+        <div className="payTitle">{title}</div>
       </div>
-
-      <button className="payBtn" onClick={handlePay}>
-        PAY
-      </button>
     </div>
   );
 }
