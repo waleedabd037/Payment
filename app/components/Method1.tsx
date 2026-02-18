@@ -6,15 +6,10 @@ export default function Method1({ amount, upiId }: any) {
 
   const upiLink = `upi://pay?pa=${upiId}&pn=${merchantName}&am=${amount}&cu=INR&tn=${orderId}`;
 
-  // 👇 Detect mobile device
+  // Detect mobile
   const isMobile =
     typeof window !== "undefined" &&
     /android|iphone|ipad|ipod/i.test(navigator.userAgent);
-
-  // 👇 Desktop should open website homepage instead of upi
-  const websiteHome = "https://paytm.com/";
-
-  const webUrl = isMobile ? upiLink : websiteHome;
 
   return (
     <div className="section">
@@ -24,21 +19,21 @@ export default function Method1({ amount, upiId }: any) {
         title="Paytm"
         logo="/paytm.png"
         appUrl={upiLink}
-        webUrl={webUrl}
+        webUrl={isMobile ? upiLink : "https://paytm.com/"}
       />
 
       <PayRow
         title="PhonePe"
         logo="/phonepe.jpg"
         appUrl={upiLink}
-        webUrl={webUrl}
+        webUrl={isMobile ? upiLink : "https://www.phonepe.com/"}
       />
 
       <PayRow
         title="UPI"
         logo="/upi.jpg"
         appUrl={upiLink}
-        webUrl={webUrl}
+        webUrl={isMobile ? upiLink : "https://www.npci.org.in/what-we-do/upi/product-overview"}
       />
     </div>
   );
