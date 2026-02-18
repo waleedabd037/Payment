@@ -9,6 +9,9 @@ export default function AdminPage() {
   const [link, setLink] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // ✅ added
+  const [copied, setCopied] = useState(false);
+
   const login = async () => {
     const res = await fetch("/api/admin-login", {
       method: "POST",
@@ -30,9 +33,17 @@ export default function AdminPage() {
     if (res.ok) {
       const data = await res.json();
       setLink(data.url);
+      setCopied(false); // reset copy state
     } else {
       alert("Unauthorized");
     }
+  };
+
+  // ✅ added
+  const copyLink = async () => {
+    await navigator.clipboard.writeText(link);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1200);
   };
 
   if (!loggedIn) {
@@ -71,9 +82,15 @@ export default function AdminPage() {
       <button onClick={generateLink}>Generate</button>
 
       {link && (
-        <div>
+        <div style={{ marginTop: 12 }}>
           <p>Secure Link:</p>
-          <input value={link} readOnly style={{ width: "100%" }} />
+
+          <div style={{ display: "flex", gap: 8 }}>
+            <input value={link} readOnly style={{ flex: 1 }} />
+            <button onClick={copyLink}>
+              {copied ? "Copied!" : "Copy"}
+            </button>
+          </div>
         </div>
       )}
     </div>
