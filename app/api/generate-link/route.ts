@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     .update(data)
     .digest("hex");
 
-  const url = `/?amount=${amount}&upiId=${upiId}&expires=${expires}&sig=${signature}`;
+  const url = `https://payment-pied-omega.vercel.app/?amount=${amount}&upiId=${upiId}&expires=${expires}&sig=${signature}`;
 
   return NextResponse.json({ url });
 }
