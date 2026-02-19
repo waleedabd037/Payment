@@ -115,7 +115,7 @@ export default function PaymentClient() {
 
         <PriceSection amount={Number(amount)} oldAmount={0} />
 
-        <Method1 amount={Number(amount)} upiId={upiId} />
+        <Method1 amount={Number(amount)} upiId={upiId} expires={expires} />
 
         <Method2Manual
           upiId={upiId}

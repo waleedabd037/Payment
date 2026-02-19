@@ -1,12 +1,13 @@
 import PayRow from "./PayRow";
 
-export default function Method1({ amount, upiId }: any) {
+export default function Method1({ amount, upiId, expires }: any) {
   const merchantName = "Merchant";
-  const orderId = "ORD" + Date.now();
+
+  // ✅ Stable orderId
+  const orderId = "ORD" + expires;
 
   const upiLink = `upi://pay?pa=${upiId}&pn=${merchantName}&am=${amount}&cu=INR&tn=${orderId}`;
 
-  // Detect mobile
   const isMobile =
     typeof window !== "undefined" &&
     /android|iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -33,7 +34,11 @@ export default function Method1({ amount, upiId }: any) {
         title="UPI"
         logo="/upi.jpg"
         appUrl={upiLink}
-        webUrl={isMobile ? upiLink : "https://www.npci.org.in/what-we-do/upi/product-overview"}
+        webUrl={
+          isMobile
+            ? upiLink
+            : "https://www.npci.org.in/what-we-do/upi/product-overview"
+        }
       />
     </div>
   );
