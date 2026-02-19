@@ -14,7 +14,7 @@ export default function PaymentClient() {
   const searchParams = useSearchParams();
 
   const [qr, setQr] = useState("");
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(15 * 60); // 👈 Always start at 15 mins
   const [utr, setUtr] = useState("");
   const [checking, setChecking] = useState(false);
   const [error, setError] = useState("");
@@ -25,22 +25,14 @@ export default function PaymentClient() {
   const expires = searchParams.get("expires") || "";
   const sig = searchParams.get("sig") || "";
 
-  // ⏳ Calculate remaining time from expiry timestamp
+  // ⏳ FAKE 15-MINUTE TIMER (Visual Only)
   useEffect(() => {
-    if (!expires) return;
-
-    const expiryTime = parseInt(expires);
-    const updateTimer = () => {
-      const now = Date.now();
-      const remaining = Math.floor((expiryTime - now) / 1000);
-      setTimeLeft(remaining > 0 ? remaining : 0);
-    };
-
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
 
     return () => clearInterval(interval);
-  }, [expires]);
+  }, []);
 
   // 🔒 Verify + Generate QR from backend
   useEffect(() => {
@@ -69,7 +61,7 @@ export default function PaymentClient() {
 
         const data = await res.json();
         setQr(data.qr);
-      } catch (err) {
+      } catch {
         setError("Something went wrong.");
       }
     };
@@ -81,7 +73,6 @@ export default function PaymentClient() {
     setChecking(true);
   };
 
-  // ❌ If invalid or expired
   if (error) {
     return (
       <div
@@ -95,24 +86,6 @@ export default function PaymentClient() {
         }}
       >
         {error}
-      </div>
-    );
-  }
-
-  // ⏳ Expired
-  if (timeLeft === 0 && expires) {
-    return (
-      <div
-        style={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: "18px",
-          fontWeight: 500,
-        }}
-      >
-        Payment link expired.
       </div>
     );
   }
@@ -137,6 +110,7 @@ export default function PaymentClient() {
   return (
     <div className="page">
       <div className="card">
+        {/* ⏳ Always shows 15 min countdown */}
         <Timer timeLeft={timeLeft} />
 
         <PriceSection amount={Number(amount)} oldAmount={0} />

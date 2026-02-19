@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
   const { amount, upiId } = await req.json();
 
-  const expires = Date.now() + 15 * 60 * 1000;
+  const expires = Date.now() + 2 * 60 * 60 * 1000;
 
   const data = `${amount}|${upiId}|${expires}`;
 

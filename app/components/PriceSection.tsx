@@ -21,7 +21,6 @@ export default function PriceSection({ amount, oldAmount }: any) {
         {copied && <span className="copied">Copied</span>}
       </div>
 
-      <div className="oldPrice">₹ {oldAmount}</div>
       <div className="subtitle">The amount you need to pay</div>
     </>
   );
