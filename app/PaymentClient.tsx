@@ -9,6 +9,7 @@ import PriceSection from "./components/PriceSection";
 import Method1 from "./components/Method1";
 import Method2Manual from "./components/Method2Manual";
 import Method3QR from "./components/Method3QR";
+import Warnings from "./components/Warnings";
 
 export default function PaymentClient() {
   const searchParams = useSearchParams();
@@ -125,6 +126,7 @@ export default function PaymentClient() {
         />
 
         <Method3QR qr={qr} />
+        <Warnings />
       </div>
     </div>
   );
